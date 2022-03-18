@@ -45,6 +45,7 @@ footer {
     position: absolute;
     left: 50%;
     top: 15%;
+    margin-top: 700px;
     transform: translate(-50%, -50%);
     background-color: lightblue;
     border-radius: 30px;
@@ -127,4 +128,41 @@ footer {
     border-radius: 6px;
     color: white;
     padding: 15px 23px;
+}
+
+.tableIP {
+    border: 3px solid lightblue;
+    border-radius: 30px;
+    background-color: darkgray;
+    padding: 20px 30px;
+}
+
+.btn-save {
+    background-color: #1877f2;
+    border: none;
+    margin-left: 100px;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 400px;
+    border: solid 1px #EBEBEB;
+    padding: 5rem;
+}
+
+button {
+    margin-top: 2rem;
 }

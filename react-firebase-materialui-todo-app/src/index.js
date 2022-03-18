@@ -1,11 +1,13 @@
-import React, { StrictMode } from "react";
+import React, {StrictMode} from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import TableForm from "./components/TableForm";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
+    <StrictMode>
+        <App/>,
+<TableForm />
+    </StrictMode>,
+    rootElement
 );

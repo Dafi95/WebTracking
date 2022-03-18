@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
-import { getDatabase } from "firebase/database";
 import auth from "./auth/config";
 import "./styles.css";
-import config from "./auth/config";
+import { getDatabase, ref, onValue} from "firebase/database";
 
-
-const database = getDatabase();
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState({});
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
+
+
+  const db = getDatabase();
+  const starCountRef = ref(db, 'ip/');
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+   console.log(data)
+  });
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -32,7 +38,6 @@ const App = () => {
       setInterval(() => setSuccess(""), 10000);
     }
   }, [err, success]);
-  //create user
   const createUser = (email, pass) => {
     auth
       .createUserWithEmailAndPassword(email, pass)
@@ -46,7 +51,6 @@ const App = () => {
       });
   };
 
-  // login user
 
   const loginUser = (email, pass) => {
     auth
@@ -63,7 +67,7 @@ const App = () => {
       });
   };
 
-  //logoutUser
+
   const logoutUser = () => {
     auth
       .signOut()
@@ -80,8 +84,6 @@ const App = () => {
       });
   };
 
-  // set error
-
   const errorSetting = (error) => {
     setErr(error);
   };
@@ -96,7 +98,7 @@ const App = () => {
             position: "absolute",
             zIndex: "999",
             right: "5%",
-            top: "10%"
+            top: "50%"
           }}
         >
           <strong>{err}</strong>
@@ -104,13 +106,13 @@ const App = () => {
       ) : null}
       {success !== "" ? (
         <div
-          className="alert alert-success alert-dismissible fade show"
+          className="alert"
           role="alert"
           style={{
             position: "absolute",
             zIndex: "999",
             right: "5%",
-            top: "10%"
+            top: "50%"
           }}
         >
           <strong>{success}</strong>
@@ -136,46 +138,12 @@ const App = () => {
             </button>
           </>
         )}
+
       </div>
     </div>
   );
 };
 
-try {
-  firebase.initializeApp(auth/config);
-} catch (err) {}
-
-const styles = {
-  fontFamily: "sans-serif",
-  textAlign: "center"
-};
-
-const store = createStore();
-
-const rrfProps = {
-  firebase,
-  config: {
-    userProfile: "users"
-  },
-  dispatch: store.dispatch,
-  createFirestoreInstance
-};
-
-function App() {
-  return (
-      <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          <CssBaseline />
-          <div style={styles}>
-            <AppBar />
-            <Companies />
-          </div>
-        </ReactReduxFirebaseProvider>
-      </Provider>
-  );
-}
-
-render(<App />, document.getElementById("TableIP"));
 
 
 export default App;
